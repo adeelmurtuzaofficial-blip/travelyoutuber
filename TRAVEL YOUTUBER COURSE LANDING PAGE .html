@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Youtuber Mentorship — Duniya Dekh. Paise Bana.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#E8A020;--gold-l:#F5C842;--gold-d:#B87A10;
+  --bg:#080706;--bg2:#0F0D08;--bg3:#161209;
+  --txt:#F0E8D5;--muted:#8A7E67;--dim:#4A4236;
+  --red:#D04A28;--green:#3A9A68;
+  --glass:rgba(15,13,8,0.75);
+  --border:rgba(232,160,32,0.18);
+  --border2:rgba(232,160,32,0.08);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.7;overflow-x:hidden}
+.bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.05em;line-height:1.05}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ─── TOPBAR ─── */
+.topbar{background:var(--gold);color:#080706;text-align:center;padding:10px 20px;font-size:13px;font-weight:700;letter-spacing:.04em;position:relative;z-index:50}
+.topbar s{opacity:.55}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:36px;left:0;right:0;z-index:100;padding:0 32px;pointer-events:none;transition:top .3s}
+nav.scrolled{top:0;background:rgba(8,7,6,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border2);padding:12px 32px;pointer-events:all}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.1em;color:var(--gold);pointer-events:all}
+.nav-cta{background:var(--gold);color:#080706;font-size:13px;font-weight:700;padding:10px 24px;border-radius:5px;pointer-events:all;transition:background .2s}
+.nav-cta:hover{background:var(--gold-l)}
+
+/* ─── HERO ─── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:120px 24px 80px}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;transform:scale(1.08);transition:transform 8s ease-out}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,7,6,.55) 0%,rgba(8,7,6,.72) 50%,rgba(8,7,6,1) 100%)}
+.hero-grain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.4;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:960px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(232,160,32,.45);background:rgba(232,160,32,.08);backdrop-filter:blur(8px);color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:7px 20px;border-radius:100px;margin-bottom:28px;animation:fadeUp .6s ease both}
+.hero-badge .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.5s infinite}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(58px,11vw,128px);letter-spacing:.03em;line-height:.95;margin-bottom:8px;animation:fadeUp .7s .1s ease both}
+.hero h1 .line1{display:block;color:var(--txt)}
+.hero h1 .line2{display:block;color:var(--gold);-webkit-text-stroke:1px var(--gold-d)}
+.hero h1 .line3{display:block;color:var(--txt);font-size:.7em;opacity:.85}
+.hero-sub{font-size:18px;color:rgba(240,232,213,.75);max-width:580px;margin:24px auto 36px;line-height:1.65;animation:fadeUp .7s .2s ease both}
+.hero-sub strong{color:var(--txt)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;animation:fadeUp .7s .3s ease both}
+.btn-gold{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#080706;font-size:16px;font-weight:700;padding:18px 40px;border-radius:6px;transition:all .2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,160,32,.35)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(240,232,213,.25);color:rgba(240,232,213,.75);font-size:15px;padding:16px 32px;border-radius:6px;transition:all .2s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-trust{margin-top:28px;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;font-size:13px;color:var(--muted);animation:fadeUp .7s .45s ease both}
+.hero-trust span{display:flex;align-items:center;gap:6px}
+.hero-trust .dot-gold{color:var(--gold)}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp 1s .8s ease both;z-index:2}
+.scroll-hint p{font-size:10px;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
+.scroll-mouse{width:22px;height:34px;border:1.5px solid var(--dim);border-radius:12px;display:flex;justify-content:center;padding-top:6px}
+.scroll-mouse::after{content:'';width:4px;height:7px;background:var(--gold);border-radius:2px;animation:scrollDown 1.6s infinite}
+
+/* ─── NUMBERS STRIP ─── */
+.strip{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:32px 24px}
+.strip-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:center}
+.strip-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--gold);line-height:1}
+.strip-label{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+/* ─── SECTION DEFAULTS ─── */
+.section{padding:90px 24px}
+.container{max-width:800px;margin:0 auto}
+.container-wide{max-width:1060px;margin:0 auto}
+.label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:600}
+.h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,7vw,78px);line-height:1.0;margin-bottom:20px}
+.h2 em{font-style:normal;color:var(--gold)}
+.body-text{color:var(--muted);font-size:17px;line-height:1.75}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ─── PAIN SECTION ─── */
+.pain-section{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:48px}
+.pain-img-col{position:relative;border-radius:12px 0 0 12px;overflow:hidden;min-height:500px}
+.pain-img-col img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.9)}
+.pain-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,7,6,.5),transparent);display:flex;align-items:flex-end;padding:28px}
+.pain-quote-card{background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:10px;padding:20px 22px}
+.pain-quote-card p{font-size:15px;color:var(--txt);font-style:italic;line-height:1.6}
+.pain-quote-card .who{font-size:12px;color:var(--gold);margin-top:8px;font-weight:600;letter-spacing:.08em}
+.pain-list-col{padding:36px 40px;display:flex;flex-direction:column;justify-content:center}
+.pain-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--border2)}
+.pain-item:last-child{border-bottom:none}
+.pain-x{color:var(--red);font-size:20px;flex-shrink:0;margin-top:2px;font-weight:700}
+.pain-text{font-size:16px;color:var(--muted);line-height:1.6}
+.pain-text strong{color:var(--txt)}
+@media(max-width:700px){.pain-grid{grid-template-columns:1fr}.pain-img-col{min-height:260px;border-radius:12px 12px 0 0}.pain-list-col{padding:24px 0}}
+
+/* ─── FREE TRIPS CURIOSITY ─── */
+.free-trips{background:var(--bg);padding:0 24px 0}
+.free-trips-inner{max-width:1060px;margin:0 auto;position:relative;overflow:hidden;border-radius:18px;background:url('https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;min-height:500px;display:flex;align-items:center}
+.free-trips-inner::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,7,6,.95) 45%,rgba(8,7,6,.4) 100%)}
+.free-trips-content{position:relative;z-index:2;padding:60px 56px;max-width:560px}
+.free-trips-content .label{margin-bottom:12px}
+.free-trips-content .h2{font-size:clamp(46px,7vw,82px);margin-bottom:20px}
+.free-trips-list{list-style:none;margin:24px 0 32px}
+.free-trips-list li{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border2);font-size:15px;color:var(--muted)}
+.free-trips-list li:last-child{border-bottom:none}
+.free-trips-list li strong{color:var(--txt)}
+.free-trips-list .num{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);line-height:1.1;flex-shrink:0;width:28px}
+@media(max-width:700px){.free-trips-content{padding:36px 24px}.free-trips-inner{min-height:auto}}
+
+/* ─── WHO THIS IS FOR ─── */
+.for-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:40px}
+.for-card{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:24px 20px;transition:border-color .3s,transform .3s}
+.for-card:hover{border-color:rgba(232,160,32,.4);transform:translateY(-4px)}
+.for-card .icon{font-size:28px;margin-bottom:14px}
+.for-card h3{font-size:16px;font-weight:600;color:var(--txt);margin-bottom:8px}
+.for-card p{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ─── BUDGET MANAGEMENT ─── */
+.budget-section{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.budget-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:48px}
+.budget-img{border-radius:14px;overflow:hidden;position:relative}
+.budget-img img{width:100%;height:420px;object-fit:cover}
+.budget-img-badge{position:absolute;top:20px;right:20px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:10px;padding:14px 18px;text-align:center}
+.budget-img-badge .val{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);display:block;line-height:1}
+.budget-img-badge .label{font-size:11px;color:var(--muted);letter-spacing:.05em}
+.budget-points{list-style:none}
+.budget-point{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--border2)}
+.budget-point:last-child{border-bottom:none}
+.budget-point .icon{width:40px;height:40px;background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.budget-point h4{font-size:15px;font-weight:600;color:var(--txt);margin-bottom:4px}
+.budget-point p{font-size:13px;color:var(--muted);line-height:1.6}
+@media(max-width:700px){.budget-split{grid-template-columns:1fr;gap:28px}.budget-img img{height:240px}}
+
+/* ─── DESTINATION GALLERY ─── */
+.gallery-section{padding:80px 0}
+.gallery-section .container-wide{padding:0 24px}
+.gallery-scroll{display:flex;gap:16px;overflow-x:auto;padding:24px 24px 32px;scrollbar-width:none;cursor:grab}
+.gallery-scroll::-webkit-scrollbar{display:none}
+.gallery-scroll:active{cursor:grabbing}
+.gallery-card{flex-shrink:0;width:260px;height:340px;border-radius:14px;overflow:hidden;position:relative;transition:transform .3s}
+.gallery-card:hover{transform:scale(1.03)}
+.gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.gallery-card:hover img{transform:scale(1.08)}
+.gallery-card-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(8,7,6,.9),transparent);padding:24px 18px 18px;pointer-events:none}
+.gallery-card-info h4{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--txt);letter-spacing:.05em}
+.gallery-card-info p{font-size:12px;color:var(--gold);margin-top:2px}
+.gallery-hint{text-align:center;font-size:12px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-top:8px}
+
+/* ─── VIDEO SECTION ─── */
+.video-section{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.video-wrap{position:relative;max-width:800px;margin:40px auto 0;border-radius:14px;overflow:hidden;border:1px solid var(--border);cursor:pointer}
+.video-thumbnail{width:100%;display:block;filter:brightness(.7)}
+.video-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(8,7,6,.35);transition:background .3s}
+.video-wrap:hover .video-overlay{background:rgba(8,7,6,.2)}
+.play-btn{width:72px;height:72px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .3s,background .2s;margin-bottom:16px}
+.video-wrap:hover .play-btn{transform:scale(1.1);background:var(--gold-l)}
+.play-btn svg{width:28px;height:28px;fill:#080706;margin-left:4px}
+.video-caption{font-size:15px;color:var(--txt);font-weight:600}
+.video-sub{font-size:13px;color:var(--muted);margin-top:4px}
+.video-frame{display:none;position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-wrap.playing .video-overlay{display:none}
+.video-wrap.playing .video-frame{display:block}
+.video-wrap.playing{padding-bottom:56.25%;height:0}
+
+/* ─── 3D COURSE MOCKUP ─── */
+.mockup-section{padding:90px 24px;text-align:center}
+.mockup-wrap{perspective:1200px;margin:60px auto 0;max-width:440px;cursor:pointer}
+.mockup-3d{width:100%;transform:rotateY(-22deg) rotateX(8deg);transform-style:preserve-3d;transition:transform .6s ease;position:relative}
+.mockup-wrap:hover .mockup-3d{transform:rotateY(-10deg) rotateX(4deg)}
+.course-box{background:linear-gradient(145deg,#1A140A,#0F0C06);border:1px solid rgba(232,160,32,.35);border-radius:14px;padding:0;overflow:hidden;position:relative;box-shadow:20px 20px 60px rgba(0,0,0,.7),-2px -2px 30px rgba(232,160,32,.08)}
+.course-box-img{width:100%;height:240px;object-fit:cover;opacity:.65}
+.course-box-body{padding:28px 28px 24px}
+.course-box-badge{display:inline-block;background:var(--gold);color:#080706;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 14px;border-radius:4px;margin-bottom:16px}
+.course-box-title{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--txt);letter-spacing:.05em;line-height:1.1;margin-bottom:10px}
+.course-box-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+.course-box-items{display:flex;flex-direction:column;gap:8px}
+.course-box-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+.course-box-item::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.course-box-spine{position:absolute;top:0;bottom:0;left:-18px;width:18px;background:linear-gradient(90deg,#0A0805,#1A140A);border-radius:4px 0 0 4px;border:1px solid rgba(232,160,32,.2);border-right:none;transform-origin:right;transform:rotateY(90deg);backface-visibility:hidden}
+.course-box-shadow{position:absolute;bottom:-20px;left:10%;right:10%;height:20px;background:radial-gradient(ellipse,rgba(0,0,0,.6) 0%,transparent 70%);filter:blur(8px)}
+
+/* ─── MODULES ─── */
+.modules-section{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:40px;border:1px solid var(--border2);border-radius:14px;overflow:hidden}
+.mod-card{background:var(--bg3);padding:28px;transition:background .3s}
+.mod-card:hover{background:#1A160D}
+.mod-num{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--gold);opacity:.2;line-height:1;margin-bottom:8px}
+.mod-title{font-size:17px;font-weight:600;color:var(--txt);margin-bottom:8px}
+.mod-desc{font-size:14px;color:var(--muted);line-height:1.65}
+.mod-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.mod-tag{font-size:11px;padding:3px 10px;border:1px solid var(--border);border-radius:4px;color:var(--muted);letter-spacing:.05em}
+@media(max-width:650px){.modules-grid{grid-template-columns:1fr}}
+
+/* ─── TESTIMONIALS ─── */
+.testimonials-section{padding:90px 24px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:44px}
+.testi-card{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;padding:26px;transition:border-color .3s,transform .3s}
+.testi-card:hover{border-color:rgba(232,160,32,.3);transform:translateY(-4px)}
+.testi-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:14px}
+.testi-img-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.testi-img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--border)}
+.testi-name{font-size:14px;font-weight:600;color:var(--txt)}
+.testi-detail{font-size:12px;color:var(--muted);margin-top:2px}
+.testi-quote{font-size:15px;color:var(--muted);line-height:1.7;font-style:italic}
+.testi-result{margin-top:14px;display:inline-flex;align-items:center;gap:8px;background:rgba(58,154,104,.1);border:1px solid rgba(58,154,104,.25);border-radius:6px;padding:6px 14px;font-size:13px;color:var(--green);font-weight:600}
+
+/* ─── OFFER STACK / PRICING ─── */
+.pricing-section{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.offer-stack{margin:36px 0}
+.offer-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--border2)}
+.offer-row:last-child{border-bottom:none}
+.offer-name{font-size:16px;color:var(--txt);font-weight:500}
+.offer-name small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:3px}
+.offer-val{font-size:15px;color:var(--green);font-weight:600;white-space:nowrap}
+.offer-val.bonus{color:var(--gold)}
+.total-row{display:flex;justify-content:space-between;border-top:1.5px solid var(--border);padding:18px 0 0;margin-top:4px}
+.total-row .t1{color:var(--muted);font-size:15px}
+.total-row .t2{color:var(--muted);font-size:20px;text-decoration:line-through}
+.price-card{background:radial-gradient(ellipse at top,rgba(232,160,32,.07),transparent 60%),var(--bg3);border:1.5px solid var(--gold);border-radius:16px;padding:40px 32px;text-align:center;margin-top:28px;position:relative;overflow:hidden}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.price-ribbon{position:absolute;top:18px;right:-28px;background:var(--red);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 40px;transform:rotate(32deg);text-transform:uppercase}
+.price-mrp{font-size:18px;color:var(--dim);text-decoration:line-through;margin-bottom:6px}
+.price-main{font-family:'Bebas Neue',sans-serif;font-size:96px;color:var(--gold);line-height:1;letter-spacing:.02em}
+.price-sub{font-size:14px;color:var(--muted);margin-bottom:28px}
+.emi-note{font-size:13px;color:var(--muted);margin-top:14px;display:flex;align-items:center;justify-content:center;gap:8px}
+.emi-note::before{content:'●';color:var(--gold);font-size:8px}
+
+/* ─── GUARANTEE ─── */
+.guarantee{display:flex;gap:24px;align-items:flex-start;background:rgba(58,154,104,.06);border:1px solid rgba(58,154,104,.22);border-radius:14px;padding:30px 26px;margin-top:32px}
+.guarantee-icon{font-size:52px;flex-shrink:0;line-height:1}
+.guarantee h3{font-size:20px;font-weight:600;color:var(--txt);margin-bottom:8px}
+.guarantee p{font-size:15px;color:var(--muted);line-height:1.7}
+@media(max-width:600px){.guarantee{flex-direction:column}}
+
+/* ─── URGENCY ─── */
+.urgency-section{text-align:center;padding:80px 24px}
+.seats-bar-wrap{max-width:440px;margin:8px auto 32px}
+.seats-bg{background:var(--bg2);border-radius:100px;height:10px;overflow:hidden;border:1px solid var(--border2)}
+.seats-fill{background:linear-gradient(90deg,var(--red),#E86020);height:100%;border-radius:100px;width:73%;position:relative}
+.seats-fill::after{content:'';position:absolute;top:0;right:0;bottom:0;width:12px;background:rgba(255,255,255,.3);border-radius:100px;animation:shimmer 2s infinite}
+.seats-label{font-size:13px;color:var(--muted);margin-top:10px}
+.timer-row{display:flex;justify-content:center;gap:12px;margin:28px 0}
+.timer-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;min-width:70px;text-align:center}
+.timer-num{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--txt);line-height:1;display:block}
+.timer-lbl{font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.timer-sep{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--gold);display:flex;align-items:center;padding-bottom:8px}
+
+/* ─── FAQ ─── */
+.faq-section{background:var(--bg2);border-top:1px solid var(--border2)}
+.faq-list{margin-top:40px}
+.faq-item{border-bottom:1px solid var(--border2)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;cursor:pointer;font-size:17px;font-weight:600;color:var(--txt)}
+.faq-arrow{color:var(--gold);font-size:20px;transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:15px;color:var(--muted);line-height:1.75}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
+
+/* ─── FINAL CTA ─── */
+.final-cta{position:relative;overflow:hidden;text-align:center;padding:100px 24px}
+.final-cta-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;filter:brightness(.35) saturate(.8)}
+.final-cta-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(8,7,6,.7),rgba(8,7,6,.9))}
+.final-cta-content{position:relative;z-index:2}
+.final-cta-content .h2{font-size:clamp(52px,10vw,110px)}
+.final-cta-content p{color:rgba(240,232,213,.7);font-size:18px;max-width:520px;margin:0 auto 36px;line-height:1.65}
+
+/* ─── FOOTER ─── */
+footer{padding:32px 24px;text-align:center;font-size:13px;color:var(--dim);border-top:1px solid var(--border2)}
+footer a{color:var(--dim);text-decoration:underline}
+
+/* ─── STICKY CTA ─── */
+.sticky{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(8,7,6,.95);backdrop-filter:blur(16px);border-top:1px solid var(--border);padding:14px 24px;z-index:200;align-items:center;justify-content:space-between;gap:12px}
+.sticky .s-price{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--gold);line-height:1}
+.sticky .s-price small{display:block;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--dim);font-weight:400}
+@media(max-width:760px){.sticky{display:flex};body{padding-bottom:76px}}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes scrollDown{0%,100%{transform:translateY(0);opacity:1}60%{transform:translateY(8px);opacity:.3}}
+@keyframes shimmer{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">🔥 Batch 3 — Sirf 11 Seats Bachi Hain &nbsp;·&nbsp; MRP <s>₹35,000</s> — Aaj Sirf ₹19,999 &nbsp;·&nbsp; Offer Sunday Tak</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo">✈ TravelYT</div>
+    <a href="#pricing" class="nav-cta">Seat Book Karo →</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span>India Ka #1 Travel YouTuber Mentorship</div>
+    <h1>
+      <span class="line1">Zindagi Jeene Ka</span>
+      <span class="line2">Waqt Aa Gaya</span>
+      <span class="line3">Office Nahi — Duniya Ghoomne Ka</span>
+    </h1>
+    <p class="hero-sub">
+      9-to-5 ki qaid se nikal. <strong>Minimum budget mein world travel karo</strong> — aur apni journey YouTube pe daal ke <strong>lakhs kamao</strong>. Yeh sirf ek course nahi — yeh teri zindagi badal dega.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-gold">✈️ &nbsp;Seat Lock Karo — ₹19,999</a>
+      <a href="#video" class="btn-outline">▶ &nbsp;Pehle Story Dekho</a>
+    </div>
+    <div class="hero-trust">
+      <span><span class="dot-gold">★</span> 620+ Students Already Travelling</span>
+      <span><span class="dot-gold">●</span> 30-Day Money Back</span>
+      <span><span class="dot-gold">●</span> Phone Se Shuru Karo</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <p>Scroll karo</p>
+    <div class="scroll-mouse"></div>
+  </div>
+</section>
+
+<!-- ═══ NUMBERS ═══ -->
+<div class="strip">
+  <div class="strip-inner">
+    <div class="reveal">
+      <div class="strip-num">620+</div>
+      <div class="strip-label">Students Currently<br>Travelling & Earning</div>
+    </div>
+    <div class="reveal">
+      <div class="strip-num">₹7K</div>
+      <div class="strip-label">Average Monthly Cost<br>SE Asia Travel</div>
+    </div>
+    <div class="reveal">
+      <div class="strip-num">4.8★</div>
+      <div class="strip-label">Average Rating<br>From Students</div>
+    </div>
+    <div class="reveal">
+      <div class="strip-num">18</div>
+      <div class="strip-label">Countries Covered in<br>Our Budget Frameworks</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAIN ═══ -->
+<section class="section pain-section">
+  <div class="container-wide">
+    <p class="label reveal">Seedha Baat Karte Hain</p>
+    <h2 class="h2 reveal">Har Sunday Raat <em>Yahi Hota Hai</em> Na?</h2>
+    <div class="pain-grid">
+      <div class="pain-img-col reveal-left">
+        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=700&auto=format&fit=crop&q=80" alt="Office worker stressed" loading="lazy">
+        <div class="pain-img-overlay">
+          <div class="pain-quote-card">
+            <p>"Mujhe bhi ghoomna tha… but kabhi nahi hua."</p>
+            <div class="who">— Woh jo tune kabhi nahi bola</div>
+          </div>
+        </div>
+      </div>
+      <div class="pain-list-col reveal-right">
+        <div class="pain-item">
+          <span class="pain-x">✕</span>
+          <span class="pain-text"><strong>Sunday raat 10 baje alarm set karte ho</strong> — aur andar se ek cheez toot ti hai. Next week ka dread already start. Repeat. Repeat. Repeat.</span>
+        </div>
+        <div class="pain-item">
+          <span class="pain-x">✕</span>
+          <span class="pain-text">Instagram pe kisi ki Bali trip dekhi — swipe kiya, <strong>andar kuch jalaa</strong>. "Yeh log kaise karte hain?" — phir phone rakha aur kaam pe wapas.</span>
+        </div>
+        <div class="pain-item">
+          <span class="pain-x">✕</span>
+          <span class="pain-text"><strong>"Travel karne ke liye paisa nahi hai"</strong> — ye line ab feel nahi hoti, ye sach lagti hai. Europe ka budget sunke hi band kiya tha sab kuch.</span>
+        </div>
+        <div class="pain-item">
+          <span class="pain-x">✕</span>
+          <span class="pain-text">YouTube start karna chahte the — phir socha <strong>"views nahi aayenge, kya fayda?"</strong> Ghar wale already bol rahe hain "kuch stable karo."</span>
+        </div>
+        <div class="pain-item">
+          <span class="pain-x">✕</span>
+          <span class="pain-text">Passion hai. Phone hai. Time nikaaloge. <strong>Bas ek cheez missing hai</strong> — koi jo bataye ki exactly kahan se shuru karo aur isme career banta kaise hai.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FREE TRIPS CURIOSITY ═══ -->
+<section class="section" style="background:var(--bg);padding:80px 24px">
+  <div class="free-trips">
+    <div class="free-trips-inner">
+      <div class="free-trips-content">
+        <p class="label reveal">Yeh Sab Possible Hai</p>
+        <h2 class="h2 reveal">Apni Pehli <em>4 Trips</em><br>Practically Free Karo</h2>
+        <p class="body-text reveal" style="margin-bottom:0">Haan, suna sahi. Yeh "jugaad" nahi — yeh woh exact system hai jo experienced travellers use karte hain. Hum tumhe sikhayenge:</p>
+        <ul class="free-trips-list reveal">
+          <li>
+            <span class="num">01</span>
+            <span><strong>Flight Seat Sale Hack:</strong> Kaise ₹1,999 mein international flights milti hain — jab baaki ₹20,000 dete hain</span>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <span><strong>Free Stays System:</strong> Couchsurfing, Workaway, aur volunteer programs se free accommodation — legally, safely</span>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <span><strong>Credit Card Travel Points:</strong> Ek specific card se 1 saal mein 2 free round trips — bina extra kharche ke</span>
+          </li>
+          <li>
+            <span class="num">04</span>
+            <span><strong>Collab Trips:</strong> Jab channel 5K subs cross kare — hotels aur hostels free mein dene lagte hain. Hum batayenge kab aur kaise pitch karo</span>
+          </li>
+        </ul>
+        <a href="#pricing" class="btn-gold reveal">Yeh Sikhna Hai Mujhe →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO THIS IS FOR ═══ -->
+<section class="section" style="background:var(--bg)">
+  <div class="container-wide">
+    <p class="label reveal center" style="text-align:center">Kiske Liye Hai Yeh Program</p>
+    <h2 class="h2 reveal" style="text-align:center;max-width:700px;margin:0 auto 0">Tumhare Liye — Agar <em>Ek Bhi</em> Point Match Kare</h2>
+    <div class="for-grid" style="margin-top:44px">
+      <div class="for-card reveal"><div class="icon">💼</div><h3>9-to-5 Se Thak Gaye</h3><p>Job chal rahi hai, lekin andar se kuch aur chahiye. Travel teri calling hai — ab route chahiye.</p></div>
+      <div class="for-card reveal"><div class="icon">💰</div><h3>"Budget Nahi Hai"</h3><p>"Paise nahi hain" feel hota hai barrier. Hum dikhayenge ki actually yeh barrier kitni choti hai.</p></div>
+      <div class="for-card reveal"><div class="icon">📱</div><h3>YouTube Shuru Karna Hai</h3><p>Channel banana chahte ho but — niche, content, views, monetization — sab confusing hai.</p></div>
+      <div class="for-card reveal"><div class="icon">🎒</div><h3>Student Ya Fresher Ho</h3><p>Income abhi kam hai. Travel aur career dono ek saath banana chahte ho — yeh possible hai.</p></div>
+      <div class="for-card reveal"><div class="icon">📸</div><h3>Sirf Phone Hai</h3><p>DSLR nahi hai — koi baat nahi. Top travel YouTubers ne sirf phone se shuru kiya. Hum bhi karayenge.</p></div>
+      <div class="for-card reveal"><div class="icon">🔥</div><h3>2025 Mein Badlana Hai</h3><p>Ek aur saal sirf sochte nahi rehna. Action leni hai. Ek batch, ek decision — life change.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DESTINATION GALLERY ═══ -->
+<section class="gallery-section">
+  <div class="container-wide">
+    <p class="label reveal" style="padding:0 24px">Our Students Travel Here</p>
+    <h2 class="h2 reveal" style="padding:0 24px;max-width:600px">Yeh Sab <em>Budget Mein</em> Possible Hai</h2>
+  </div>
+  <div class="gallery-scroll" id="galleryScroll">
+    <div class="gallery-card reveal">
+      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=500&auto=format&fit=crop&q=80" alt="Bali" loading="lazy">
+      <div class="gallery-card-info"><h4>BALI, INDONESIA</h4><p>From ₹18,000 · 7 Days</p></div>
+    </div>
+    <div class="gallery-card reveal">
+      <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=500&auto=format&fit=crop&q=80" alt="Bangkok" loading="lazy">
+      <div class="gallery-card-info"><h4>BANGKOK, THAILAND</h4><p>From ₹12,000 · 5 Days</p></div>
+    </div>
+    <div class="gallery-card reveal">
+      <img src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=500&auto=format&fit=crop&q=80" alt="Nepal" loading="lazy">
+      <div class="gallery-card-info"><h4>NEPAL</h4><p>From ₹8,000 · 7 Days</p></div>
+    </div>
+    <div class="gallery-card reveal">
+      <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&auto=format&fit=crop&q=80" alt="Vietnam" loading="lazy">
+      <div class="gallery-card-info"><h4>VIETNAM</h4><p>From ₹14,000 · 6 Days</p></div>
+    </div>
+    <div class="gallery-card reveal">
+      <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=500&auto=format&fit=crop&q=80" alt="Georgia" loading="lazy">
+      <div class="gallery-card-info"><h4>GEORGIA, TBILISI</h4><p>From ₹22,000 · 8 Days</p></div>
+    </div>
+    <div class="gallery-card reveal">
+      <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&auto=format&fit=crop&q=80" alt="Sri Lanka" loading="lazy">
+      <div class="gallery-card-info"><h4>SRI LANKA</h4><p>From ₹9,000 · 6 Days</p></div>
+    </div>
+  </div>
+  <p class="gallery-hint">← drag to explore →</p>
+</section>
+
+<!-- ═══ VIDEO ═══ -->
+<section class="section video-section" id="video">
+  <div class="container">
+    <p class="label reveal" style="text-align:center">Real Talk — Unka Experience Suno</p>
+    <h2 class="h2 reveal" style="text-align:center">Batch 2 Ke Students <em>Bol Rahe Hain</em></h2>
+    <div class="video-wrap reveal" id="videoWrap" onclick="playVideo()">
+      <img class="video-thumbnail" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=900&auto=format&fit=crop&q=80" alt="Student results video thumbnail" loading="lazy">
+      <div class="video-overlay">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-caption">Student Results — Batch 2 Highlights</div>
+        <div class="video-sub">620+ students · 4.8★ rating · 3 countries average per student</div>
+      </div>
+      <iframe class="video-frame" id="ytFrame" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--dim);margin-top:14px">Real students. Unedited results. No actors.</p>
+  </div>
+</section>
+
+<!-- ═══ BUDGET MANAGEMENT ═══ -->
+<section class="section budget-section">
+  <div class="container-wide">
+    <p class="label reveal">Complete Budget Mastery</p>
+    <h2 class="h2 reveal">Paisa Nahi — <em>Planning</em> Lagti Hai</h2>
+    <div class="budget-split">
+      <div class="budget-img reveal-left">
+        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=700&auto=format&fit=crop&q=80" alt="Travel budgeting" loading="lazy">
+        <div class="budget-img-badge">
+          <span class="val">₹6,800</span>
+          <span class="label">7-night Bali trip<br>our student did</span>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <p class="body-text" style="margin-bottom:28px">Hum tumhe wohi exact system denge jo hamare students use karte hain — not theory, not YouTube basics — actual practical budget frameworks:</p>
+        <ul class="budget-points">
+          <li class="budget-point">
+            <div class="icon">✈️</div>
+            <div>
+              <h4>Flight Budget Hacking</h4>
+              <p>Google Flights ITA Matrix, Seat Sale alerts, open-jaw routing — inse ₹4,000-6,000 mein international flights possible hain jab baaki ₹18,000+ dete hain.</p>
+            </div>
+          </li>
+          <li class="budget-point">
+            <div class="icon">🏠</div>
+            <div>
+              <h4>Accommodation Zero Tak</h4>
+              <p>Hostel comparison sites, Couchsurfing setup, Workaway exchange programs, aur collab stays — monthly accommodation cost ₹0 tak laana sikhayenge.</p>
+            </div>
+          </li>
+          <li class="budget-point">
+            <div class="icon">🍜</div>
+            <div>
+              <h4>Local Food = Real Experience + Cheap</h4>
+              <p>Tourist restaurants avoid karo — local markets, street food stalls, kahan khana khate hain locals? Wahi khao. ₹150-300 mein full meals possible hain most destinations mein.</p>
+            </div>
+          </li>
+          <li class="budget-point">
+            <div class="icon">💳</div>
+            <div>
+              <h4>Credit Card Travel Strategy</h4>
+              <p>HDFC Diners, Axis Atlas, SBI Card — kaunse cards use karo, kaise points earn karo, kaise free flights aur hotel nights redeem karo. Complete Indian context mein.</p>
+            </div>
+          </li>
+          <li class="budget-point">
+            <div class="icon">📊</div>
+            <div>
+              <h4>Trip Budget Tracker Template</h4>
+              <p>Hamari ready-made Excel/Sheets template milegi — plan karo, track karo, kahan overspend ho raha hai realtime dekho. Every student ko milti hai.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3D COURSE MOCKUP ═══ -->
+<section class="mockup-section">
+  <div class="container">
+    <p class="label reveal" style="text-align:center">What You're Getting</p>
+    <h2 class="h2 reveal" style="text-align:center">Ek Complete <em>System</em><br>Travel + YouTube + Income</h2>
+    <p class="body-text reveal" style="text-align:center;max-width:520px;margin:16px auto 0">Rotate karo 👆 — drag ya hover karke 3D mein dekho kya hai andar</p>
+  </div>
+  <div class="mockup-wrap" id="mockupWrap">
+    <div class="mockup-3d" id="mockup3d">
+      <div class="course-box">
+        <img class="course-box-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&auto=format&fit=crop&q=80" alt="Course" loading="lazy">
+        <div class="course-box-body">
+          <span class="course-box-badge">Complete Program — Batch 3</span>
+          <div class="course-box-title">Travel YouTuber<br>Mentorship Program</div>
+          <div class="course-box-sub">6 Modules · 40+ Hours · Lifetime Access</div>
+          <div class="course-box-items">
+            <div class="course-box-item">Zero-Budget World Travel Masterclass</div>
+            <div class="course-box-item">YouTube Channel Setup Kit</div>
+            <div class="course-box-item">Phone Videography Crash Course</div>
+            <div class="course-box-item">Budget Management Framework</div>
+            <div class="course-box-item">4-Stream Monetization Blueprint</div>
+            <div class="course-box-item">Community + 3 Live Q&A Calls</div>
+            <div class="course-box-item" style="color:var(--gold)">+ 2 Bonus Modules Included</div>
+          </div>
+        </div>
+      </div>
+      <div class="course-box-shadow"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MODULES ═══ -->
+<section class="section modules-section">
+  <div class="container-wide">
+    <p class="label reveal">Complete Curriculum</p>
+    <h2 class="h2 reveal">6 Modules. <em>Ek Life Change.</em></h2>
+    <div class="modules-grid">
+      <div class="mod-card reveal">
+        <div class="mod-num">01</div>
+        <div class="mod-title">Zero-Budget Travel Masterclass</div>
+        <div class="mod-desc">Flight seat sales, free stays, couchsurfing, credit card hacks, visa tips — sab practical. ₹15K mein ek month travel karna seekhoge.</div>
+        <div class="mod-tags"><span class="mod-tag">Flights</span><span class="mod-tag">Stays</span><span class="mod-tag">Visa</span><span class="mod-tag">Hacks</span></div>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-num">02</div>
+        <div class="mod-title">YouTube Channel Setup</div>
+        <div class="mod-desc">Niche selection, channel branding, About page, banner, thumbnails — ek weekend mein live channel ready. Zero experience needed.</div>
+        <div class="mod-tags"><span class="mod-tag">Niche</span><span class="mod-tag">Branding</span><span class="mod-tag">SEO</span></div>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-num">03</div>
+        <div class="mod-title">Content Strategy & Views</div>
+        <div class="mod-desc">Viral topic formula, thumbnail psychology, title templates, 90-day content calendar — exact system jo hamare students use karte hain.</div>
+        <div class="mod-tags"><span class="mod-tag">Algorithm</span><span class="mod-tag">Thumbnails</span><span class="mod-tag">Titles</span></div>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-num">04</div>
+        <div class="mod-title">Phone Videography</div>
+        <div class="mod-desc">Cinematic travel vlogs sirf phone se. Angles, lighting, B-roll, stabilization — plus CapCut aur free editing apps ka full walkthrough.</div>
+        <div class="mod-tags"><span class="mod-tag">Shooting</span><span class="mod-tag">Editing</span><span class="mod-tag">CapCut</span></div>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-num">05</div>
+        <div class="mod-title">Budget Management System</div>
+        <div class="mod-desc">Trip budget planning, credit card points, local food guides, accommodation deals — complete budget tracker template + live demo.</div>
+        <div class="mod-tags"><span class="mod-tag">Planning</span><span class="mod-tag">Tracker</span><span class="mod-tag">Credit Cards</span></div>
+      </div>
+      <div class="mod-card reveal">
+        <div class="mod-num">06</div>
+        <div class="mod-title">Monetization — 4 Streams</div>
+        <div class="mod-desc">AdSense, brand deals, affiliate links, digital products — sab 4 streams setup karoge. Brand pitch templates aur collab scripts included.</div>
+        <div class="mod-tags"><span class="mod-tag">AdSense</span><span class="mod-tag">Brands</span><span class="mod-tag">Affiliates</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testimonials-section">
+  <div class="container-wide">
+    <p class="label reveal" style="text-align:center">Real Students. Real Numbers.</p>
+    <h2 class="h2 reveal" style="text-align:center">Unlogo Ne Kiya — <em>Tum Bhi Kar Sakte Ho</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-img-row">
+          <img class="testi-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Rahul" loading="lazy">
+          <div><div class="testi-name">Rahul Khanna</div><div class="testi-detail">Ex-IT Employee · Pune</div></div>
+        </div>
+        <p class="testi-quote">"Mujhe lagta tha travel sirf unke liye hai jinke paas paise hain. 3 mahine baad mein Bali mein tha — total ₹18,000 mein sab kuch. Channel ka pehla brand deal bhi aa gaya."</p>
+        <div class="testi-result">📈 47K Subscribers · ₹28K/month</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-img-row">
+          <img class="testi-img" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&auto=format&fit=crop&q=80" alt="Priya" loading="lazy">
+          <div><div class="testi-name">Priya Sharma</div><div class="testi-detail">Marketing Executive · Delhi</div></div>
+        </div>
+        <p class="testi-quote">"Job chhodi nahi thi — part time shuru kiya. 6 mahine mein channel se ₹22,000/month aane laga. Ab job chhodne ki zarurat hi nahi — channel ne zyada de diya."</p>
+        <div class="testi-result">📈 31K Subscribers · ₹22K/month</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-img-row">
+          <img class="testi-img" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" alt="Arjun" loading="lazy">
+          <div><div class="testi-name">Arjun Mehta</div><div class="testi-detail">Freelancer · Mumbai</div></div>
+        </div>
+        <p class="testi-quote">"Budget travel framework ne sab badal diya. Nepal, Vietnam, Thailand, Bali — 4 trips ek saal mein. Sab content ban gaya. Channel grow ho raha hai, life bhi."</p>
+        <div class="testi-result">📈 19K Subscribers · 4 Countries Visited</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="section pricing-section" id="pricing">
+  <div class="container">
+    <p class="label reveal" style="text-align:center">The Offer — Sab Kuch Ek Saath</p>
+    <h2 class="h2 reveal" style="text-align:center">Poora Value Dekho — <em>Phir Price</em></h2>
+
+    <div class="offer-stack">
+      <div class="offer-row reveal"><div class="offer-name">Zero-Budget Travel Masterclass<small>6 modules — practical, actionable, tested</small></div><div class="offer-val">Worth ₹8,000</div></div>
+      <div class="offer-row reveal"><div class="offer-name">YouTube Channel Setup Kit<small>Templates, banners, scripts, checklists</small></div><div class="offer-val">Worth ₹5,000</div></div>
+      <div class="offer-row reveal"><div class="offer-name">Phone Videography Crash Course<small>Cinematic vlogs from any smartphone</small></div><div class="offer-val">Worth ₹4,000</div></div>
+      <div class="offer-row reveal"><div class="offer-name">Budget Management System + Tracker<small>Excel template + credit card strategy</small></div><div class="offer-val">Worth ₹3,500</div></div>
+      <div class="offer-row reveal"><div class="offer-name">90-Day Content Calendar<small>Topics, thumbnails, upload plan — ready</small></div><div class="offer-val">Worth ₹3,000</div></div>
+      <div class="offer-row reveal"><div class="offer-name">4-Stream Monetization Blueprint<small>AdSense, brands, affiliates, products</small></div><div class="offer-val">Worth ₹6,000</div></div>
+      <div class="offer-row reveal"><div class="offer-name">Community + 3 Live Q&A Calls<small>Direct mentorship — 620+ member group</small></div><div class="offer-val">Worth ₹5,000</div></div>
+      <div class="offer-row reveal"><div class="offer-name">BONUS: Flight Deal Alert System<small>₹4,000 flights — kab aur kaise pakdein</small></div><div class="offer-val bonus">FREE BONUS</div></div>
+      <div class="offer-row reveal"><div class="offer-name">BONUS: Brand Pitch Templates<small>Word-for-word DMs that land travel deals</small></div><div class="offer-val bonus">FREE BONUS</div></div>
+    </div>
+    <div class="total-row reveal"><span class="t1">Total Real Value</span><span class="t2">₹35,000+</span></div>
+
+    <div class="price-card reveal">
+      <div class="price-ribbon">Limited</div>
+      <div class="price-mrp">MRP ₹35,000</div>
+      <div class="price-main">₹19,999</div>
+      <div class="price-sub">One-time payment · No hidden charges · Lifetime access</div>
+      <a href="#" class="btn-gold" style="font-size:18px;padding:20px 56px">✈️ &nbsp; Haan — Meri Seat Book Karo</a>
+      <div class="emi-note">UPI · Card · Net Banking · EMI ₹1,667/month bhi available</div>
+    </div>
+
+    <div class="guarantee reveal">
+      <div class="guarantee-icon">🛡️</div>
+      <div>
+        <h3>30-Day Full Money-Back Guarantee</h3>
+        <p>Program join karo. 30 din poori honestly se use karo. Agar lagta hai jo promise kiya wo nahi mila — ek email bhejo. Koi sawaal nahi. Koi argument nahi. 100% refund. Tumhara risk zero. Humara confidence 100%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ URGENCY ═══ -->
+<section class="urgency-section">
+  <div class="container">
+    <p class="label reveal" style="text-align:center">Batch 3 — Almost Full</p>
+    <h2 class="h2 reveal" style="text-align:center">Sirf <em style="color:var(--red)">11 Seats</em> Bacha Hain</h2>
+    <p class="body-text reveal" style="text-align:center;max-width:500px;margin:16px auto 28px">Batch size intentionally chhoti rakhte hain — personal attention deni hai. Sunday ke baad price wapas ₹35,000 ho jayegi.</p>
+    <div class="seats-bar-wrap reveal">
+      <div class="seats-bg"><div class="seats-fill"></div></div>
+      <div class="seats-label">54 out of 65 seats filled — Batch closes this Sunday</div>
+    </div>
+    <div class="timer-row reveal">
+      <div class="timer-box"><span class="timer-num" id="tDays">02</span><span class="timer-lbl">Days</span></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-box"><span class="timer-num" id="tHours">14</span><span class="timer-lbl">Hours</span></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-box"><span class="timer-num" id="tMins">38</span><span class="timer-lbl">Mins</span></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-box"><span class="timer-num" id="tSecs">22</span><span class="timer-lbl">Secs</span></div>
+    </div>
+    <a href="#pricing" class="btn-gold reveal">Abhi Seat Lock Karo — ₹19,999</a>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="section faq-section">
+  <div class="container">
+    <p class="label reveal">Tumhare Doubts — Seedhe Jawab</p>
+    <h2 class="h2 reveal">Common <em>Sawalon Ka</em> Jawab</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Travel budget nahi hai — kya yeh mere liye sahi hai? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Yeh exactly tumhare liye hai. Program ka sabse bada pillar zero-budget travel hai. ₹7,000-18,000 mein ek week ki international trip possible hai — hum prove karte hain numbers ke saath. Budget hone ke baad nahi — budget create karte hue travel karna seekhoge.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Job ke saath kar sakte hain? Weekend pe time hoga? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">100% designed for working professionals. Sab recorded content hai — kabhi bhi dekho. Live Q&A calls weekend pe hain. Tumhare schedule ke around fit hoga — tumhara schedule adjust nahi karna padega. Most students full-time job karte hue complete karte hain.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Mere paas sirf phone hai — kya yeh kaafi hai? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Bilkul kaafi hai. Top travel YouTubers mein se kaafi ne sirf phone se shuru kiya — aaj bhi karte hain. Hamara phone videography module specifically is liye banaya gaya hai. Gear nahi — skills matter karti hain. iPhone ya Samsung — dono se cinematic content banana sikhayenge.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">YouTube pe itna competition hai — mera channel grow hoga? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Competition hai, saturation nahi. Travel niche mein Indian audience ke liye — regional content, budget travel content, niche destinations — bahut white space hai. Hum exactly woh gaps dikhayenge jahan 2025 mein grow karna easy hai. 620+ students already growing channels ke saath proof hai.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Paise wapas milenge agar kaam nahi aaya? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">30-din ki money-back guarantee hai — no questions asked. Ek email bhejo anytime 30 din ke andar. Full refund. Simple. Humara confidence apne content pe itna hai ki tumhara risk zero rakhte hain. Agar we don't deliver — tum deserve karte ho apna paisa wapas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Pehle 4 trips free kaise hogi — yeh sach hai? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Haan. "Free" matlab — flight seat sales se ₹2,000 tickets, couchsurfing se free stays, credit card points se complimentary nights. Combine karoge toh pehli 2-3 trips practically zero mein ho sakti hain. Yeh jugaad nahi — experienced travellers yahi karte hain. Hum step-by-step sikhate hain.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="final-cta">
+  <div class="final-cta-bg"></div>
+  <div class="final-cta-content">
+    <p class="label reveal" style="text-align:center">Ek Last Sawaal</p>
+    <h2 class="h2 reveal" style="text-align:center">Agle 5 Saal <em>Yahi</em><br>Zindagi?</h2>
+    <p class="reveal">Ek aur saal. Phir ek aur. Office. Alarm. Repeat. Ya ek decision — aur sab kuch badal jaata hai. Duniya dekh. Channel banao. Apni story likho.</p>
+    <a href="#pricing" class="btn-gold reveal" style="font-size:18px;padding:22px 60px">✈️ &nbsp; Haan — Yeh Zindagi Chahiye Mujhe</a>
+    <p class="reveal" style="font-size:13px;color:rgba(240,232,213,.4);margin-top:20px">30-day guarantee · Sunday close · 11 seats left · EMI available</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Travel Youtuber Mentorship &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Refund Policy</a> &nbsp;·&nbsp; <a href="#">Contact Us</a></p>
+  <p style="margin-top:8px">Results shown are from actual students. Individual results may vary based on effort and consistency applied.</p>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky" id="stickyBar">
+  <div class="s-price">₹19,999 <small>MRP ₹35,000 · 30-day guarantee</small></div>
+  <a href="#pricing" class="btn-gold" style="font-size:14px;padding:12px 20px;white-space:nowrap">Book Seat →</a>
+</div>
+
+<script>
+// ── NAV SCROLL ──
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+  document.getElementById('stickyBar').style.display = window.scrollY > 400 ? 'flex' : 'none';
+});
+
+// ── HERO PARALLAX ──
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.15}px)`;
+});
+
+// ── SCROLL REVEAL ──
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => ro.observe(el));
+
+// ── GALLERY DRAG ──
+const gs = document.getElementById('galleryScroll');
+let isDragging = false, startX, scrollLeft;
+gs.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX - gs.offsetLeft; scrollLeft = gs.scrollLeft; });
+gs.addEventListener('mouseleave', () => isDragging = false);
+gs.addEventListener('mouseup', () => isDragging = false);
+gs.addEventListener('mousemove', e => { if (!isDragging) return; e.preventDefault(); gs.scrollLeft = scrollLeft - (e.pageX - gs.offsetLeft - startX); });
+
+// ── 3D COURSE MOCKUP MOUSE TILT ──
+const wrap = document.getElementById('mockupWrap');
+const box = document.getElementById('mockup3d');
+wrap.addEventListener('mousemove', e => {
+  const r = wrap.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5;
+  const y = (e.clientY - r.top) / r.height - 0.5;
+  box.style.transform = `rotateY(${-22 + x * 30}deg) rotateX(${8 - y * 20}deg)`;
+});
+wrap.addEventListener('mouseleave', () => { box.style.transform = 'rotateY(-22deg) rotateX(8deg)'; });
+
+// ── VIDEO PLAY ──
+function playVideo() {
+  const vw = document.getElementById('videoWrap');
+  const frame = document.getElementById('ytFrame');
+  frame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+  vw.classList.add('playing');
+}
+
+// ── FAQ ──
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── COUNTDOWN TIMER ──
+function updateTimer() {
+  const now = new Date();
+  const sunday = new Date(now);
+  sunday.setDate(now.getDate() + (7 - now.getDay()) % 7 || 7);
+  sunday.setHours(23, 59, 59, 0);
+  const diff = sunday - now;
+  if (diff <= 0) return;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('tDays').textContent = String(d).padStart(2,'0');
+  document.getElementById('tHours').textContent = String(h).padStart(2,'0');
+  document.getElementById('tMins').textContent = String(m).padStart(2,'0');
+  document.getElementById('tSecs').textContent = String(s).padStart(2,'0');
+}
+updateTimer();
+setInterval(updateTimer, 1000);
+</script>
+</body>
+</html>
